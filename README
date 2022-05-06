@@ -1,4 +1,7 @@
+## working api before final
+
 npm i express mongoose dotenv nodemon
 npm install crypto-js
 npm i jsonwebtoken
 npm i stripe
+
