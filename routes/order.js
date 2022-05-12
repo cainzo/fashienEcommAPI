@@ -6,7 +6,7 @@ const {
 const Order = require("../models/Order");
 const router = require("express").Router();
 
-//crear nuevo producto
+//crear nuevo order
 router.post("/", verify, async (req, res) => {
   const newOrder = new Order(req.body);
   try {
@@ -64,13 +64,21 @@ router.get("/", verifyTokenAndAdmin, async (req, res) => {
 
 //get monthly income
 router.get("/income", verifyTokenAndAdmin, async (req, res) => {
+  const productId = req.query.pid;
   const date = new Date();
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
   const last2Month = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
 
   try {
     const data = await Order.aggregate([
-      { $match: { createdAt: { $gte: last2Month } } },
+      { 
+        $match: { 
+          createdAt: { $gte: last2Month },
+           ...(productId && { 
+             products: {$elemMatch:{productId} },
+             }),
+             },
+             },
       {
         $project: {
           month: { $month: "$createdAt" },

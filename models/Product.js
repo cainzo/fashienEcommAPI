@@ -7,10 +7,10 @@ const ProductSchema = new mongoose.Schema(
         desc:{type: String, required:true},
         img:{type: String, required:true},
         cat:{type: Array, required:true},
-        size:{type: String, },
+        size:{type: Array, },
         color:{type: String, },
         price:{type: Number, required:true}, 
-       
+        
     },
     {
         timestamps: true

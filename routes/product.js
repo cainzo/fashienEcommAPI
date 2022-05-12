@@ -15,7 +15,7 @@ router.post('/', verifyTokenAndAdmin , async(req,res)=>{
     }
 })
 
-//Update Productoer
+//Update Producto
 router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
     try {
       const updatedProduct = await Product.findByIdAndUpdate(req.params.id, {$set: req.body},{ new: true }); // buscamos el usuario por id, updateamos y retornamos
@@ -35,7 +35,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-//get all producto
+//get  producto
 router.get("/find/:id", async (req, res) => {
     try {
       const product = await Product.findById(req.params.id);
